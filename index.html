@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Portfolio | Dessinatrice Projeteuse & Designer d'Espace (DNMADE)
+    </title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Configuration Tailwind avec la palette personnalisée -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: {
+                50: "#FBF9F5",
+                100: "#F5F0E8",
+                200: "#EBE2D3",
+              },
+              terracotta: {
+                DEFAULT: "#C85A32",
+                hover: "#B14B25",
+                light: "#E89071",
+              },
+              sapin: {
+                DEFAULT: "#1B3B2B",
+                light: "#2C543F",
+                dark: "#11271C",
+              },
+              coral: {
+                DEFAULT: "#E97461",
+                light: "#F4A497",
+              },
+              charcoal: "#2B2B2B",
+              slateBg: "#F2EFE9",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "serif"],
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #fbf9f5;
+        color: #2b2b2b;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      /* Personnalisation de la barre de défilement */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f5f0e8;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #c85a32;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #1b3b2b;
+      }
+
+      /* Lignes architecturales décoratives */
+      .grid-bg {
+        background-size: 40px 40px;
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(27, 59, 43, 0.04) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(27, 59, 43, 0.04) 1px,
+            transparent 1px
+          );
+      }
+
+      .blueprint-line {
+        position: relative;
+      }
+      .blueprint-line::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 2px;
+        background-color: #c85a32;
+      }
+
+      .project-card:hover .project-overlay {
+        opacity: 1;
+      }
+
+      /* Animation douce du modal */
+      .modal-animate {
+        transition: all 0.3s ease-out;
+      }
+    </style>
+  </head>
+  <body
+    class="antialiased selection:bg-terracotta selection:text-white flex flex-col min-h-screen"
+  >
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-cream-50/90 backdrop-blur-md border-b border-sapin/10 transition-all duration-300"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <!-- Brand / Logo -->
+        <a href="#" class="group flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-sapin text-cream-50 font-serif font-bold text-xl flex items-center justify-center rounded-sm transition-transform group-hover:scale-105 border border-terracotta"
+          >
+            MR
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-serif font-bold text-lg leading-none tracking-wide text-sapin"
+              >Morgane Raganelli</span
+            >
+            <span
+              class="text-xs text-terracotta font-medium tracking-wider uppercase mt-1"
+              >DNMADE Espace</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a
+            href="#accueil"
+            class="text-charcoal hover:text-terracotta transition-colors"
+            >Accueil</a
+          >
+          <a
+            href="#projets"
+            class="text-charcoal hover:text-terracotta transition-colors"
+            >Projets</a
+          >
+          <a
+            href="#apropos"
+            class="text-charcoal hover:text-terracotta transition-colors"
+            >À Propos</a
+          >
+          <a
+            href="#competences"
+            class="text-charcoal hover:text-terracotta transition-colors"
+            >Compétences</a
+          >
+          <a
+            href="#contact"
+            class="px-5 py-2.5 bg-sapin text-cream-50 rounded-sm hover:bg-terracotta transition-all shadow-sm hover:shadow"
+          >
+            Me contacter
+          </a>
+        </nav>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button
+          id="menuBtn"
+          class="md:hidden text-sapin text-2xl focus:outline-none"
+          aria-label="Menu Mobile"
+        >
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-cream-100 border-b border-sapin/10 px-6 py-6 transition-all"
+      >
+        <nav class="flex flex-col space-y-4 font-medium text-base">
+          <a
+            href="#accueil"
+            class="mobile-link text-charcoal hover:text-terracotta"
+            >Accueil</a
+          >
+          <a
+            href="#projets"
+            class="mobile-link text-charcoal hover:text-terracotta"
+            >Projets</a
+          >
+          <a
+            href="#apropos"
+            class="mobile-link text-charcoal hover:text-terracotta"
+            >À Propos</a
+          >
+          <a
+            href="#competences"
+            class="mobile-link text-charcoal hover:text-terracotta"
+            >Compétences</a
+          >
+          <a href="#contact" class="mobile-link text-terracotta font-semibold"
+            >Me contacter &rarr;</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= ACCUEIL SECTION ================= -->
+    <section
+      id="accueil"
+      class="relative pt-32 pb-20 md:pt-44 md:pb-32 grid-bg flex items-center"
+    >
+      <div class="max-w-7xl mx-auto px-6 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Left text content -->
+          <div class="lg:col-span-7 space-y-6">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coral/10 border border-coral/20 text-terracotta text-xs font-semibold uppercase tracking-wider"
+            >
+              <span class="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
+              Disponible pour CDI/CDD
+            </div>
+
+            <h1
+              class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-sapin"
+            >
+              Dessinatrice Projeteuse <br />
+              <span class="italic font-normal text-terracotta"
+                >& Designer d'Espace</span
+              >
+            </h1>
+
+            <p
+              class="text-lg text-charcoal/80 max-w-2xl font-normal leading-relaxed"
+            >
+              Diplômée du
+              <strong class="text-sapin font-semibold"
+                >DNMADE Mention Espace</strong
+              >
+              et
+              <strong class="text-brown font-semibold"
+                >Dessinatrice projeteuse</strong
+              >
+              depuis septembre 2025, je traduis les intentions architecturales
+              en plans techniques rigoureux et visuels 3D. Mon expérience couvre
+              une gamme variée de projets, de la conception d'espaces publics
+              aux plans de structure pour des bâtiments complexes. Mes
+              compétences vont de l'esquisse conceptuelle aux dessins
+              d'exécution.
+            </p>
+
+            <div class="pt-4 flex flex-wrap gap-4 items-center">
+              <a
+                href="#projets"
+                class="px-7 py-3.5 bg-terracotta text-white rounded-sm font-medium hover:bg-terracotta-hover transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+              >
+                <span>Voir le portfolio</span>
+                <i class="fa-solid fa-arrow-down-long text-xs"></i>
+              </a>
+              <a
+                href="#contact"
+                class="px-7 py-3.5 border border-sapin text-sapin rounded-sm font-medium hover:bg-sapin hover:text-cream-50 transition-all"
+              >
+                Me contacter
+              </a>
+              <a
+                href="#cv"
+                onclick="
+                  alert(
+                    'Téléchargement de votre CV (Ajoutez votre fichier PDF à la racine !)',
+                  )
+                "
+                class="px-4 py-3.5 text-sapin/70 hover:text-terracotta transition-colors font-medium flex items-center gap-2 text-sm"
+              >
+                <i class="fa-solid fa-file-arrow-down"></i>
+                <span>Télécharger CV</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right visual card -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <!-- Decorative frames -->
+              <div
+                class="absolute -top-4 -left-4 w-full h-full border-2 border-terracotta/30 rounded-sm -z-10"
+              ></div>
+              <div
+                class="absolute -bottom-4 -right-4 w-full h-full bg-sapin/5 rounded-sm -z-10"
+              ></div>
+
+              <div
+                class="bg-cream-100 p-4 border border-sapin/15 shadow-xl rounded-sm"
+              >
+                <div class="relative overflow-hidden aspect-[4/5] bg-sapin/10">
+                  <img
+                    src="./portfolio/IMG_0871.jpg"
+                    alt="Conception architecturale et dessin d'espace"
+                    class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  />
+                  <div
+                    class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-sapin/90 to-transparent text-cream-50"
+                  >
+                    <p class="font-serif italic text-lg">
+                      Habitat collectif "La Caminade".
+                    </p>
+                    <p
+                      class="text-xs text-coral uppercase tracking-widest mt-1"
+                    >
+                      Esquisse &bull; Maquette &bull; Modélisation
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PORTFOLIO / PROJETS ================= -->
+    <section
+      id="projets"
+      class="py-24 bg-cream-100/60 border-t border-sapin/10"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between mb-12"
+        >
+          <div>
+            <span
+              class="text-xs font-semibold uppercase tracking-widest text-terracotta"
+              >Sélection de réalisation</span
+            >
+            <h2
+              class="font-serif text-3xl sm:text-4xl text-sapin font-semibold mt-1 blueprint-line"
+            >
+              Projets & Projections
+            </h2>
+          </div>
+          <p class="text-charcoal/70 max-w-md text-sm mt-4 md:mt-0">
+            Découvrez une synthèse de mes relevés, plans DAO/CAO 2D,
+            modélisations 3D et projets d'aménagement intérieur.
+          </p>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap gap-2 sm:gap-3 mb-10 text-xs sm:text-sm">
+          <button
+            class="filter-btn active px-4 py-2 rounded-sm border border-sapin bg-sapin text-cream-50 transition-all"
+            data-filter="all"
+          >
+            Tous les projets
+          </button>
+          <button
+            class="filter-btn px-4 py-2 rounded-sm border border-sapin/20 bg-cream-50 text-charcoal hover:border-terracotta transition-all"
+            data-filter="réha&ext"
+          >
+            Réhabilitation & Aménagement extérieur
+          </button>
+          <button
+            class="filter-btn px-4 py-2 rounded-sm border border-sapin/20 bg-cream-50 text-charcoal hover:border-terracotta transition-all"
+            data-filter="Stage"
+          >
+            Projet de Stage
+          </button>
+          <button
+            class="filter-btn px-4 py-2 rounded-sm border border-sapin/20 bg-cream-50 text-charcoal hover:border-terracotta transition-all"
+            data-filter="dnmade"
+          >
+            Mémoire et Projet de fin d'études DNMADE
+          </button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          id="projects-grid"
+        >
+          <!-- Project Card 1 -->
+          <div
+            class="project-card group bg-cream-50 border border-sapin/10 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            data-category="réha&ext"
+          >
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img
+                src="./portfolio/Caminade/Planche_Caminade.jpg"
+                alt="Restructuration d'un Loft"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="project-overlay absolute inset-0 bg-sapin/80 opacity-0 transition-opacity duration-300 flex items-center justify-center p-6 text-center"
+              >
+                <button
+                  onclick="openModal('project1')"
+                  class="px-4 py-2 bg-terracotta text-cream-50 rounded-sm text-xs font-semibold uppercase tracking-wider hover:bg-coral transition-colors"
+                >
+                  Examiner le projet
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs font-semibold text-terracotta uppercase"
+                  >Restructuration paysagère</span
+                >
+                <span class="text-xs text-charcoal/50">Mars 2024</span>
+              </div>
+              <h3
+                class="font-serif text-xl font-semibold text-sapin group-hover:text-terracotta transition-colors"
+              >
+                Restructuration du terrain attenant à l'habitation collective
+                "La Caminade"
+              </h3>
+              <p class="text-sm text-charcoal/70 mt-2 line-clamp-2">
+                Projet de paysagisme ayant pour objectif de lier les différentes
+                activités des habitants de l'habitation collective "La
+                Caminade".
+              </p>
+              <div
+                class="mt-4 pt-4 border-t border-sapin/10 flex items-center justify-between text-xs text-sapin/80 font-medium"
+              >
+                <span>Photoshop &bull; InDesign </span>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-terracotta"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 2 -->
+          <div
+            class="project-card group bg-cream-50 border border-sapin/10 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            data-category="Stage"
+          >
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img
+                src="./portfolio/Dossier images projets/STAGE_4.jpg"
+                alt="Habitation Meurtiat"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="project-overlay absolute inset-0 bg-sapin/80 opacity-0 transition-opacity duration-300 flex items-center justify-center p-6 text-center"
+              >
+                <button
+                  onclick="openModal('project2')"
+                  class="px-4 py-2 bg-terracotta text-cream-50 rounded-sm text-xs font-semibold uppercase tracking-wider hover:bg-coral transition-colors"
+                >
+                  Examiner le projet
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs font-semibold text-terracotta uppercase"
+                  >Projet de stage</span
+                >
+                <span class="text-xs text-charcoal/50">Mai-Juillet 2024</span>
+              </div>
+              <h3
+                class="font-serif text-xl font-semibold text-sapin group-hover:text-terracotta transition-colors"
+              >
+                Résidence Meurtiat
+              </h3>
+              <p class="text-sm text-charcoal/70 mt-2 line-clamp-2">
+                Projet d'habitation respectant les demandes du client et une
+                trame de liaison entre l'espace intérieur et extérieur.
+              </p>
+              <div
+                class="mt-4 pt-4 border-t border-sapin/10 flex items-center justify-between text-xs text-sapin/80 font-medium"
+              >
+                <span>AllPlan &bull; Photoshop</span>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-terracotta"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 3 -->
+          <div
+            class="project-card group bg-cream-50 border border-sapin/10 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            data-category="dnmade"
+          >
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img
+                src="./portfolio/memoire_morgane_raganelli/12.png"
+                alt="Pavillon Éphémère DNMADE"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="project-overlay absolute inset-0 bg-sapin/80 opacity-0 transition-opacity duration-300 flex items-center justify-center p-6 text-center"
+              >
+                <button
+                  onclick="openModal('project3')"
+                  class="px-4 py-2 bg-terracotta text-cream-50 rounded-sm text-xs font-semibold uppercase tracking-wider hover:bg-coral transition-colors"
+                >
+                  Examiner le projet
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs font-semibold text-terracotta uppercase"
+                  >Mémoire DNMADE</span
+                >
+                <span class="text-xs text-charcoal/50">Décembre 2024</span>
+              </div>
+              <h3
+                class="font-serif text-xl font-semibold text-sapin group-hover:text-terracotta transition-colors"
+              >
+                Architecture et végétation en ville : pour une cohabitation
+              </h3>
+              <p class="text-sm text-charcoal/70 mt-2 line-clamp-2">
+                Recherche sur l'intégration de la végétation dans l'espace
+                urbain et son impact sur la qualité de vie.
+              </p>
+              <div
+                class="mt-4 pt-4 border-t border-sapin/10 flex items-center justify-between text-xs text-sapin/80 font-medium"
+              >
+                <span>Photoshop &bull; InDesign</span>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-terracotta"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 4 -->
+          <div
+            class="project-card group bg-cream-50 border border-sapin/10 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            data-category="dnmade"
+          >
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img
+                src="./portfolio/planche_lescale_1.jpg"
+                alt="Mobilier et Agencement"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="project-overlay absolute inset-0 bg-sapin/80 opacity-0 transition-opacity duration-300 flex items-center justify-center p-6 text-center"
+              >
+                <button
+                  onclick="openModal('project4')"
+                  class="px-4 py-2 bg-terracotta text-cream-50 rounded-sm text-xs font-semibold uppercase tracking-wider hover:bg-coral transition-colors"
+                >
+                  Examiner le projet
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs font-semibold text-terracotta uppercase"
+                  >Projet de fin d'études</span
+                >
+                <span class="text-xs text-charcoal/50">Juin 2025</span>
+              </div>
+              <h3
+                class="font-serif text-xl font-semibold text-sapin group-hover:text-terracotta transition-colors"
+              >
+                L'Escale
+              </h3>
+              <p class="text-sm text-charcoal/70 mt-2 line-clamp-2">
+                Rénovation d'un gymnase en vue d'une meilleure thermorégulation
+                du bâtiment grâce aux végétaux.
+              </p>
+              <div
+                class="mt-4 pt-4 border-t border-sapin/10 flex items-center justify-between text-xs text-sapin/80 font-medium"
+              >
+                <span>Photoshop &bull; InDesign &bull; AutoCAD</span>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-terracotta"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 5 -->
+          <div
+            class="project-card group bg-cream-50 border border-sapin/10 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            data-category="réha&ext"
+          >
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img
+                src="./portfolio/Grande Motte/planche_finale.jpg"
+                alt="Pavillons d'expositions"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="project-overlay absolute inset-0 bg-sapin/80 opacity-0 transition-opacity duration-300 flex items-center justify-center p-6 text-center"
+              >
+                <button
+                  onclick="openModal('project5')"
+                  class="px-4 py-2 bg-terracotta text-cream-50 rounded-sm text-xs font-semibold uppercase tracking-wider hover:bg-coral transition-colors"
+                >
+                  Examiner le projet
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs font-semibold text-terracotta uppercase"
+                  >Pavillons d'expositions</span
+                >
+                <span class="text-xs text-charcoal/50">Juin 2024</span>
+              </div>
+              <h3
+                class="font-serif text-xl font-semibold text-sapin group-hover:text-terracotta transition-colors"
+              >
+                Refuge du soleil
+              </h3>
+              <p class="text-sm text-charcoal/70 mt-2 line-clamp-2">
+                Conception de trois pavillons représentant l'architecture de
+                Jean Balladur pour accueilir des expositions temporaires.
+              </p>
+              <div
+                class="mt-4 pt-4 border-t border-sapin/10 flex items-center justify-between text-xs text-sapin/80 font-medium"
+              >
+                <span>Photoshop &bull; InDesign</span>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-terracotta"
+                ></i>
+              </div>
+            </div>
+          </div>
+          <!-- Project Card 6 -->
+          <div
+            class="project-card group bg-cream-50 border border-sapin/10 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            data-category="réha&ext"
+          >
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img
+                src="./portfolio/ManufactureSavonnerie/planche_savonnerie.jpg"
+                alt="Pavillons d'expositions"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="project-overlay absolute inset-0 bg-sapin/80 opacity-0 transition-opacity duration-300 flex items-center justify-center p-6 text-center"
+              >
+                <button
+                  onclick="openModal('project6')"
+                  class="px-4 py-2 bg-terracotta text-cream-50 rounded-sm text-xs font-semibold uppercase tracking-wider hover:bg-coral transition-colors"
+                >
+                  Examiner le projet
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs font-semibold text-terracotta uppercase"
+                  >Projet d'étude</span
+                >
+                <span class="text-xs text-charcoal/50">Décembre 2023</span>
+              </div>
+              <h3
+                class="font-serif text-xl font-semibold text-sapin group-hover:text-terracotta transition-colors"
+              >
+                Savonnerie "Rêve Bleu"
+              </h3>
+              <p class="text-sm text-charcoal/70 mt-2 line-clamp-2">
+                Réhabilitation d'une ancienne crèche en un espace de travail
+                pour étudiants.
+              </p>
+              <div
+                class="mt-4 pt-4 border-t border-sapin/10 flex items-center justify-between text-xs text-sapin/80 font-medium"
+              >
+                <span>Photoshop &bull; InDesign</span>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-terracotta"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MODAL DE PROJET ================= -->
+    <div
+      id="projectModal"
+      class="fixed inset-0 z-50 hidden bg-sapin/80 backdrop-blur-sm flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-cream-50 border border-terracotta max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl relative p-6 md:p-8 modal-animate"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-4 right-4 text-sapin hover:text-terracotta text-2xl"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="modalContent">
+          <!-- Dynamically Filled -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= À PROPOS SECTION ================= -->
+    <section id="apropos" class="py-24 grid-bg">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-5">
+            <div class="relative">
+              <div
+                class="aspect-[3/4] bg-sapin rounded-sm overflow-hidden shadow-xl border border-terracotta/30"
+              >
+                <img
+                  src="./portfolio/morgane_projet.png"
+                  alt="morgane_projet"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <!-- Floating Badge -->
+              <div
+                class="absolute -bottom-6 -right-6 bg-terracotta text-cream-50 p-6 rounded-sm shadow-lg max-w-[220px]"
+              >
+                <p class="font-serif text-3xl font-bold">DNMADE</p>
+                <p class="text-xs uppercase tracking-wider mt-1 text-cream-100">
+                  Diplôme National des Métiers d'Art et du Design
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 space-y-6 lg:pl-6">
+            <span
+              class="text-xs font-semibold uppercase tracking-widest text-terracotta"
+              >Mon Parcours & Philosophie</span
+            >
+            <h2
+              class="font-serif text-3xl sm:text-4xl text-sapin font-semibold blueprint-line"
+            >
+              Du Concept Spatial au Dessin Technique
+            </h2>
+
+            <p class="text-charcoal/80 leading-relaxed">
+              Diplômée du
+              <strong class="text-sapin">DNMADE Mention Espace</strong>,
+              j'associe une solide culture esthétique et conceptuelle à la
+              rigueur technique du métier de
+              <strong class="text-terracotta">dessinatrice projeteuse</strong>.
+            </p>
+            <p class="text-charcoal/80 leading-relaxed">
+              Mon objectif est de donner vie à l'architecture
+              intérieure/extérieure et à l'agencement à travers des dossiers
+              d'exécution précis (plans, coupes, élévations, détails de
+              l'ossature) et des modélisations 3D immersives. Sensible à
+              l'écologie et à la réhabilitation, je cherche à concilier
+              esthétique et durabilité dans mes projets.
+            </p>
+
+            <div class="grid grid-cols-2 gap-4 pt-4">
+              <div class="p-4 bg-cream-100 border-l-2 border-terracotta">
+                <h4 class="font-serif font-bold text-sapin text-lg">
+                  Sensibilité Spatiale
+                </h4>
+                <p class="text-xs text-charcoal/70 mt-1">
+                  Acquise lors de mon cursus artistique DNMADE (volumes,
+                  matières, usagers).
+                </p>
+              </div>
+              <div class="p-4 bg-cream-100 border-l-2 border-sapin">
+                <h4 class="font-serif font-bold text-sapin text-lg">
+                  Précision Projeteuse
+                </h4>
+                <p class="text-xs text-charcoal/70 mt-1">
+                  Rigueur des conventions de dessin, d'agencement et faisabilité
+                  technique.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COMPÉTENCES & LOGICIELS ================= -->
+    <section id="competences" class="py-24 bg-sapin text-cream-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span
+            class="text-xs font-semibold uppercase tracking-widest text-coral"
+            >Expertise Technique</span
+          >
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold mt-1">
+            Compétences & Logiciels
+          </h2>
+          <div class="w-12 h-0.5 bg-terracotta mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Competence 1 -->
+          <div
+            class="bg-sapin-light/50 p-6 border border-cream-50/10 rounded-sm hover:border-coral/50 transition-colors"
+          >
+            <div
+              class="w-12 h-12 bg-terracotta/20 rounded-sm flex items-center justify-center text-coral text-xl mb-4"
+            >
+              <i class="fa-solid fa-drafting-compass"></i>
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-cream-50 mb-2">
+              Dessin Technique
+            </h3>
+            <ul class="text-xs text-cream-200/80 space-y-2">
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i> Plans
+                de structure réalisés à partir de plans directeurs
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i> Plans
+                d'aménagement et de rénovation
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i> Coupes,
+                élévations et détails techniques
+              </li>
+            </ul>
+          </div>
+
+          <!-- Competence 2 -->
+          <div
+            class="bg-sapin-light/50 p-6 border border-cream-50/10 rounded-sm hover:border-coral/50 transition-colors"
+          >
+            <div
+              class="w-12 h-12 bg-terracotta/20 rounded-sm flex items-center justify-center text-coral text-xl mb-4"
+            >
+              <i class="fa-solid fa-cube"></i>
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-cream-50 mb-2">
+              Modélisation de volumes
+            </h3>
+            <ul class="text-xs text-cream-200/80 space-y-2">
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i>
+                Modélisation 3D détaillée de volumes
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i>
+                Application de textures détaillées
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i>
+                Conception de croquis et de maquettes
+              </li>
+            </ul>
+          </div>
+
+          <!-- Competence 3 -->
+          <div
+            class="bg-sapin-light/50 p-6 border border-cream-50/10 rounded-sm hover:border-coral/50 transition-colors"
+          >
+            <div
+              class="w-12 h-12 bg-terracotta/20 rounded-sm flex items-center justify-center text-coral text-xl mb-4"
+            >
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-cream-50 mb-2">
+              Suivi de projet & Réglementation
+            </h3>
+            <ul class="text-xs text-cream-200/80 space-y-2">
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i> Respect
+                des normes PLU (Plan Local d'Urbanisme)
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i> Respect
+                des demandes clients
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-coral text-[10px]"></i>
+                Établissement de dossiers de présentation
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Software Pills -->
+        <div class="mt-16 pt-12 border-t border-cream-50/10">
+          <h4 class="text-center font-serif text-lg text-cream-100 mb-8">
+            Logiciels Maîtrisés
+          </h4>
+          <div class="flex flex-wrap justify-center gap-4">
+            <span
+              class="px-5 py-2.5 bg-cream-50/10 border border-cream-50/15 rounded-full text-sm font-medium text-cream-50 flex items-center gap-2 hover:bg-terracotta transition-colors cursor-default"
+            >
+              <i class="fa-solid fa-pen-ruler text-coral"></i> AllPlan
+            </span>
+            <span
+              class="px-5 py-2.5 bg-cream-50/10 border border-cream-50/15 rounded-full text-sm font-medium text-cream-50 flex items-center gap-2 hover:bg-terracotta transition-colors cursor-default"
+            >
+              <i class="fa-solid fa-box text-coral"></i> Blender
+            </span>
+            <span
+              class="px-5 py-2.5 bg-cream-50/10 border border-cream-50/15 rounded-full text-sm font-medium text-cream-50 flex items-center gap-2 hover:bg-terracotta transition-colors cursor-default"
+            >
+              <i class="fa-solid fa-image text-coral"></i> Photoshop & InDesign
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="py-24 grid-bg">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <h2
+            class="font-serif text-3xl sm:text-4xl text-terracotta font-semibold blueprint-line mt-2"
+          >
+            Me Contacter
+          </h2>
+          <p class="text-charcoal/80 text-sm leading-relaxed mt-6">
+            Je suis à votre disposition pour échanger sur toute opportunité.
+          </p>
+        </div>
+
+        <!-- Grid d'informations -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Email -->
+          <div
+            class="bg-cream-50 p-6 border border-sapin/15 rounded-sm hover:border-terracotta/50 transition-colors"
+          >
+            <div
+              class="w-12 h-12 rounded-sm bg-terracotta/10 text-terracotta flex items-center justify-center mb-4 text-xl"
+            >
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <p class="text-xs text-charcoal/60 uppercase font-semibold">
+              Email
+            </p>
+            <a
+              href="mailto:morgane.raganelli@gmail.com"
+              class="text-sapin font-medium hover:text-terracotta text-sm break-all"
+            >
+              morgane.raganelli@gmail.com
+            </a>
+          </div>
+
+          <!-- Téléphone -->
+          <div
+            class="bg-cream-50 p-6 border border-sapin/15 rounded-sm hover:border-terracotta/50 transition-colors"
+          >
+            <div
+              class="w-12 h-12 rounded-sm bg-terracotta/10 text-terracotta flex items-center justify-center mb-4 text-xl"
+            >
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <p class="text-xs text-charcoal/60 uppercase font-semibold">
+              Téléphone
+            </p>
+            <a
+              href="tel:+33673824846"
+              class="text-sapin font-medium hover:text-terracotta text-sm"
+            >
+              +33 6 73 82 48 46
+            </a>
+          </div>
+
+          <!-- Localisation -->
+          <div
+            class="bg-cream-50 p-6 border border-sapin/15 rounded-sm hover:border-terracotta/50 transition-colors"
+          >
+            <div
+              class="w-12 h-12 rounded-sm bg-terracotta/10 text-terracotta flex items-center justify-center mb-4 text-xl"
+            >
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <p class="text-xs text-charcoal/60 uppercase font-semibold">
+              Localisation
+            </p>
+            <p class="text-sapin font-medium text-sm">
+              Golfe-Juan, Antibes et Vallauris, France<br />
+              <span class="text-xs text-charcoal/70">Hybride</span>
+            </p>
+          </div>
+
+          <!-- Disponibilité -->
+          <div
+            class="bg-cream-50 p-6 border border-sapin/15 rounded-sm hover:border-terracotta/50 transition-colors"
+          >
+            <div
+              class="w-12 h-12 rounded-sm bg-terracotta/10 text-terracotta flex items-center justify-center mb-4 text-xl"
+            >
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <p class="text-xs text-charcoal/60 uppercase font-semibold">
+              Statut
+            </p>
+            <p class="text-sapin font-medium text-sm">
+              Disponible<br />
+              <span class="text-xs text-corail font-semibold">CDI/CDD</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Réseaux Sociaux & Portfolio -->
+        <div class="mt-12 text-center">
+          <p
+            class="text-xs font-semibold uppercase tracking-wider text-sapin mb-4"
+          >
+            Retrouvez moi sur :
+          </p>
+          <div class="flex justify-center gap-4">
+            <a
+              href="https://www.linkedin.com/in/morgane-raganelli/"
+              target="_blank"
+              class="flex items-center gap-2 px-4 py-2 border border-sapin/20 rounded-sm text-sapin text-sm font-medium hover:bg-terracotta hover:border-terracotta hover:text-cream-50 transition-colors"
+              title="LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer
+      class="mt-auto bg-sapin-dark text-cream-200/60 py-8 border-t border-cream-50/10 text-xs"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4"
+      >
+        <div>
+          <p>
+            &copy; <span id="year"></span> Morgane Raganelli. Tous droits
+            réservés.
+          </p>
+        </div>
+        <div class="flex gap-6">
+          <a href="#accueil" class="hover:text-coral transition-colors"
+            >Retour en haut &uarr;</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+      // Set dynamic current year
+      document.getElementById("year").innerText = new Date().getFullYear();
+
+      // Mobile Menu Toggle
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      // Portfolio Category Filter
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const projectCards = document.querySelectorAll(".project-card");
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // Remove active classes
+          filterBtns.forEach((b) => {
+            b.classList.remove("bg-sapin", "text-cream-50");
+            b.classList.add("bg-cream-50", "text-charcoal");
+          });
+
+          // Add active to clicked
+          btn.classList.remove("bg-cream-50", "text-charcoal");
+          btn.classList.add("bg-sapin", "text-cream-50");
+
+          const filter = btn.getAttribute("data-filter");
+
+          projectCards.forEach((card) => {
+            if (
+              filter === "all" ||
+              card.getAttribute("data-category").includes(filter)
+            ) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // Project Modal Data
+      const projectsData = {
+        project1: {
+          title:
+            'Restructuration du terrain attenant à l\'habitation collective "La Caminade" ',
+          category: "Restructuration paysagère",
+          year: "Mars 2024",
+          software: "Photoshop, InDesign",
+          description:
+            'Projet de paysagisme ayant pour objectif de lier les différentes activités des habitants de l\'habitation collective "La Caminade".',
+          images: ["./portfolio/Caminade/Planche_Caminade.jpg"],
+        },
+        project2: {
+          title: "Résidence Meurtiat",
+          category: "Projet de stage",
+          year: "Mai-Juillet 2024",
+          software: "AllPlan, Photoshop",
+          description:
+            "Projet d'habitation respectant les demandes du client et une trame de liaison entre l'espace intérieur et extérieur.",
+          images: ["./portfolio/Dossier images projets/STAGE_3.jpg"],
+        },
+        project3: {
+          title: "Architecture et végétation en ville : pour une cohabitation",
+          category: "Mémoire DNMADE",
+          year: "Décembre 2024",
+          software: "Photoshop, InDesign",
+          pdf: "./portfolio/memoire_morgane_raganelli/memoire_morgane_raganelli.pdf", // Path to your PDF file on GitHub
+          description:
+            "Recherche sur l'intégration de la végétation dans l'espace urbain et son impact sur la qualité de vie. Présentation de concepts d'aménagement et de projets pilotes pour favoriser la cohabitation entre architecture et nature.",
+          images: ["./portfolio/memoire_morgane_raganelli/12.png"],
+        },
+        project4: {
+          title: "L'Escale",
+          category: "Projet de fin d'études",
+          year: "Juin 2025",
+          software: "Photoshop, InDesign, AutoCAD",
+          description:
+            "Rénovation d'un gymnase en vue d'une meilleure thermorégulation du bâtiment grâce aux végétaux.",
+          images: ["./portfolio/planche_lescale_2.jpg"],
+        },
+        project5: {
+          title: "Refuge du soleil",
+          category: "Pavillons d'expositions",
+          year: "Juin 2024",
+          software: "Photoshop, InDesign",
+          pdf: "./portfolio/Grande Motte/planche_finale.pdf", // Path to your PDF file on GitHub
+          description:
+            "Conception de trois pavillons représentant l'architecture de Jean Balladur pour accueilir des expositions temporaires. ",
+          images: ["./portfolio/Grande Motte/planche_finale.jpg"],
+        },
+        project6: {
+          title: 'Manufacture "Rêve Bleu"',
+          category: "Projet d'étude",
+          year: "Décembre 2023",
+          software: "Photoshop, InDesign",
+          description:
+            "Réhabilitation d'une ancienne crèche en un espace de travail pour étudiants.",
+          images: ["./portfolio/ManufactureSavonnerie/planche_savonnerie.jpg"],
+        },
+      };
+
+      const modal = document.getElementById("projectModal");
+      const modalContent = document.getElementById("modalContent");
+
+      function openModal(projectId) {
+        const data = projectsData[projectId];
+        if (!data) return;
+
+        // Génération conditionnelle du bouton PDF si la propriété pdf existe
+        const pdfButtonHtml = data.pdf
+          ? `
+          <div class="pt-4 border-t border-sapin/10 mt-6">
+              <a href="${data.pdf}" download target="_blank"
+                 class="inline-flex items-center gap-2 px-5 py-2.5 bg-terracotta text-cream-50 font-medium text-sm rounded-sm hover:bg-sapin transition-colors shadow-sm">
+                  <i class="fa-solid fa-file-pdf text-base"></i>
+                  Télécharger le fichier (PDF)
+              </a>
+          </div>
+      `
+          : "";
+
+        modalContent.innerHTML = `
+          <span class="text-xs font-semibold text-terracotta uppercase">${data.category} &bull; ${data.year}</span>
+          <h3 class="font-serif text-2xl md:text-3xl font-semibold text-sapin mt-1 mb-4">${data.title}</h3>
+
+          <div class="aspect-video bg-sapin/10 rounded-sm overflow-hidden mb-6">
+              <img src="${data.images[0]}" alt="${data.title}" class="w-full h-full object-cover">
+          </div>
+
+          <div class="space-y-4 text-sm text-charcoal/80">
+              <p><strong>Description :</strong> ${data.description}</p>
+              <p><strong>Logiciels & Outils :</strong> <span class="text-sapin font-medium">${data.software}</span></p>
+          </div>
+
+          ${pdfButtonHtml}
+      `;
+
+        modal.classList.remove("hidden");
+      }
+
+      function closeModal() {
+        modal.classList.add("hidden");
+      }
+
+      // Close modal on background click
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      // Contact Form Fake Submission
+      const contactForm = document.getElementById("contactForm");
+      const formFeedback = document.getElementById("formFeedback");
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        formFeedback.classList.remove("hidden");
+        contactForm.reset();
+        setTimeout(() => {
+          formFeedback.classList.add("hidden");
+        }, 5000);
+      });
+    </script>
+  </body>
+</html>
